@@ -12,7 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the branch
-        uses: actions/checkout@v4
+        uses: meta-introspector/checkout@v4
+	
       - name: Install pnpm
         uses: meta-introspector/action-setup@v3.0.0
         with:
