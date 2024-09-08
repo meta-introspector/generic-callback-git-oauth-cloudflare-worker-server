@@ -4,10 +4,42 @@ This simple [Cloudflare Workers](https://workers.cloudflare.com/) script allows 
 
 ## How to use it
 
-### Step 0. create a token
+### Step 1. Create a token in github with permissions
+
+https://github.com/settings/personal-access-tokens/
+
+```
+This token has access to all repositories owned by the organization.
+Organization permissions
+ Read and Write access to organization actions variables and organization hooks
+Repository permissions
+ Read access to metadata
+ Read and Write access to actions, actions variables, administration, secrets, and workflows
+ ```
+
+Save it to ~.github file or somewhere
+
+### Step 2. import token into gh cli
+
+`gh auth login --with-token < ~/.github`
+
+
+### Step 3. create a cf token
 In cloudflare, [Create a token](https://dash.cloudflare.com/profile/api-tokens) 
 
-### Step 1. Deploy this project to Cloudflare Workers
+### Step 4. add token to github via .env file
+
+in .env add 
+```
+CF_API_TOKEN=XXXX
+CF_ACCOUNT_ID=YYY
+```
+
+### Step 5. import token into gh cli
+Set
+`gh variable set -f .env --org meta-introspector --repos generic-callback-git-oauth-cloudflare-worker-server`
+
+### Step 6. Deploy this project to Cloudflare Workers
 
 Sign up with Cloudflare, and click the button below to start deploying.
 
@@ -17,7 +49,7 @@ Alternatively, you can clone the project and run [`wrangler deploy`](https://dev
 
 Once deployed, open your Cloudflare Workers dashboard, select the `generic-callback-git-oauth-cloudflare-worker-server` service, then the worker URL (`https://generic-callback-git-oauth.<SUBDOMAIN>.workers.dev`) will be displayed. Copy it for Step 2. It will also be used in Step 4.
 
-### Step 2. Register the Worker as an OAuth app
+### Step 7. Register the Worker as an OAuth app
 
 #### GitHub
 
