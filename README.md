@@ -11,10 +11,14 @@ https://github.com/settings/personal-access-tokens/
 ```
 This token has access to all repositories owned by the organization.
 Organization permissions
- Read and Write access to organization actions variables and organization hooks
+ Read and Write access to organization actions variables, organization hooks, and organization secrets
+ 
 Repository permissions
  Read access to metadata
  Read and Write access to actions, actions variables, administration, secrets, and workflows
+  
+
+  
  ```
 
 Save it to ~.github file or somewhere
@@ -37,7 +41,7 @@ CF_ACCOUNT_ID=YYY
 
 ### Step 5. import token into gh cli
 Set
-`gh variable set -f .env --org meta-introspector --repos generic-callback-git-oauth-cloudflare-worker-server`
+`gh secret set -f .env --org meta-introspector --repos generic-callback-git-oauth-cloudflare-worker-server`
 
 ### Step 6. Deploy this project to Cloudflare Workers
 
