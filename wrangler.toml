@@ -1,3 +1,3 @@
-name = "sveltia-cms-auth"
+name = "generic-callback-git-oauth"
 main = "src/index.js"
 compatibility_date = "2023-03-24"
