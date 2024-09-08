@@ -61,9 +61,9 @@ Once deployed, open your Cloudflare Workers dashboard, select the `generic-callb
 [Register a new OAuth application](https://github.com/settings/applications/new) on GitHub ([details](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app)) with the following properties, including your Worker URL from Step 1:
 
 - Application name: `Generic Callback Git Authenticator` (or whatever)
-- Homepage URL: `https://github.com/sveltia/sveltia-cms-auth` (or whatever)
+- Homepage URL: `https://github.com/meta-introspector/generic-callback-git-oauth-cloudflare-worker-server` (or whatever)
 - Application description: (can be left empty)
-- Authorization callback URL: `<YOUR_WORKER_URL>/callback`
+- Authorization callback URL: `https://generic-callback-git-oauth.jmikedupont2.workers.dev/callback`
 
 Once registered, click on the **Generate a new client secret** button. The app’s **Client ID** and **Client Secret** will be displayed. We’ll use them in Step 3 below.
 
@@ -72,7 +72,7 @@ Once registered, click on the **Generate a new client secret** button. The app�
 [Register a new OAuth application](https://gitlab.com/-/user_settings/applications) on GitLab ([details](https://docs.gitlab.com/ee/integration/oauth_provider.html#create-a-user-owned-application)) with the following properties, including your Worker URL from Step 1:
 
 - Name: `Generic Callback Git Authenticator` (or whatever)
-- Redirect URI: `<YOUR_WORKER_URL>/callback`
+- Redirect URI: `https://generic-callback-git-oauth.jmikedupont2.workers.dev/callback`
 - Confidential: Yes
 - Scopes: `api` only
 
@@ -80,7 +80,7 @@ Once registered, the app’s **Application ID** and **Secret** will be displayed
 
 ### Step 3. Configure the Worker
 
-Go back to the `sveltia-cms-auth` service page on the Cloudflare dashboard, select **Settings** > **Variables**, and add the following Environment Variables to your worker ([details](https://developers.cloudflare.com/workers/platform/environment-variables/#environment-variables-via-the-dashboard)):
+Go back to the `generic-callback-git-oauth` service page on the Cloudflare dashboard, select **Settings** > **Variables**, and add the following Environment Variables to your worker ([details](https://developers.cloudflare.com/workers/platform/environment-variables/#environment-variables-via-the-dashboard)):
 
 #### GitHub
 
@@ -115,7 +115,7 @@ Open `admin/config.yml` locally or remotely, and add your Worker URL from Step 1
 +  base_url: <YOUR_WORKER_URL>
 ```
 
-Commit the change. Once deployed, you can sign into Sveltia CMS remotely with GitHub or GitLab!
+Commit the change. Once deployed, you can sign into your app remotely with GitHub or GitLab!
 
 ## Plan for callbacks
 
