@@ -112,6 +112,10 @@ Open `admin/config.yml` locally or remotely, and add your Worker URL from Step 1
 
 Commit the change. Once deployed, you can sign into Sveltia CMS remotely with GitHub or GitLab!
 
+## Plan for callbacks
+
+We will allow for callbacks to call custom code in webworkers, the plan is to run o1js zkapps from typescript compiled to wasm to run mina wallet operations as part of the callback code.
+
 ## FAQ
 
 
