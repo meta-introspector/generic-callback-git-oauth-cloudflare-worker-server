@@ -4,6 +4,9 @@ This simple [Cloudflare Workers](https://workers.cloudflare.com/) script allows 
 
 ## How to use it
 
+### Step 0. create a token
+In cloudflare, [Create a token](https://dash.cloudflare.com/profile/api-tokens) 
+
 ### Step 1. Deploy this project to Cloudflare Workers
 
 Sign up with Cloudflare, and click the button below to start deploying.
