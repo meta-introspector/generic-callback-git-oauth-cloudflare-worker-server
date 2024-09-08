@@ -1,10 +1,6 @@
-# Sveltia CMS Authenticator
+# Generic Callback Git Authenticator
 
-This simple [Cloudflare Workers](https://workers.cloudflare.com/) script allows [Sveltia CMS](https://github.com/sveltia/sveltia-cms) (or Netlify/Decap CMS) users to authenticate with [GitHub](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps) or [GitLab](https://docs.gitlab.com/ee/api/oauth2.html#authorization-code-flow).
-
-You don’t have to use it if you previously had Netlify/Decap CMS and your site is still being deployed to Netlify or if you have already used [another 3rd party OAuth client](https://decapcms.org/docs/external-oauth-clients/).
-
-You can use it if your site is hosted (or has been moved to) somewhere else, such as [Cloudflare Pages](https://pages.cloudflare.com/) or [GitHub Pages](https://pages.github.com/), and you don’t have any other 3rd party client yet.
+This simple [Cloudflare Workers](https://workers.cloudflare.com/) script allows generic plugin users to authenticate with [GitHub](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps) or [GitLab](https://docs.gitlab.com/ee/api/oauth2.html#authorization-code-flow).
 
 ## How to use it
 
@@ -12,11 +8,11 @@ You can use it if your site is hosted (or has been moved to) somewhere else, suc
 
 Sign up with Cloudflare, and click the button below to start deploying.
 
-[![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/sveltia/sveltia-cms-auth)
+[![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/meta-introspector/generic-callback-git-oauth-cloudflare-worker-server)
 
 Alternatively, you can clone the project and run [`wrangler deploy`](https://developers.cloudflare.com/workers/wrangler/commands/#deploy) locally.
 
-Once deployed, open your Cloudflare Workers dashboard, select the `sveltia-cms-auth` service, then the worker URL (`https://sveltia-cms-auth.<SUBDOMAIN>.workers.dev`) will be displayed. Copy it for Step 2. It will also be used in Step 4.
+Once deployed, open your Cloudflare Workers dashboard, select the `generic-callback-git-oauth-cloudflare-worker-server` service, then the worker URL (`https://generic-callback-git-oauth.<SUBDOMAIN>.workers.dev`) will be displayed. Copy it for Step 2. It will also be used in Step 4.
 
 ### Step 2. Register the Worker as an OAuth app
 
@@ -24,7 +20,7 @@ Once deployed, open your Cloudflare Workers dashboard, select the `sveltia-cms-a
 
 [Register a new OAuth application](https://github.com/settings/applications/new) on GitHub ([details](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app)) with the following properties, including your Worker URL from Step 1:
 
-- Application name: `Sveltia CMS Authenticator` (or whatever)
+- Application name: `Generic Callback Git Authenticator` (or whatever)
 - Homepage URL: `https://github.com/sveltia/sveltia-cms-auth` (or whatever)
 - Application description: (can be left empty)
 - Authorization callback URL: `<YOUR_WORKER_URL>/callback`
@@ -35,7 +31,7 @@ Once registered, click on the **Generate a new client secret** button. The app�
 
 [Register a new OAuth application](https://gitlab.com/-/user_settings/applications) on GitLab ([details](https://docs.gitlab.com/ee/integration/oauth_provider.html#create-a-user-owned-application)) with the following properties, including your Worker URL from Step 1:
 
-- Name: `Sveltia CMS Authenticator` (or whatever)
+- Name: `Generic Callback Git Authenticator` (or whatever)
 - Redirect URI: `<YOUR_WORKER_URL>/callback`
 - Confidential: Yes
 - Scopes: `api` only
@@ -83,10 +79,8 @@ Commit the change. Once deployed, you can sign into Sveltia CMS remotely with Gi
 
 ## FAQ
 
-### Why do I have to set this thing up in the first place?
-
-Technically, we could host Sveltia CMS Authenticator on our own server and let anyone use it, just like Netlify does. The cost probably wouldn’t matter because it’s just a small, short-lived script. However, running such a **service** certainly comes with legal, privacy and security liabilities that we cannot afford. Remember that Sveltia CMS is nothing more than [@kyoshino](https://github.com/kyoshino)’s personal project. That’s why the authenticator is not offered as SaaS and you have to install it yourself.
 
 ## Acknowledgements
 
-This project was inspired by [`netlify-cms-oauth-firebase`](https://github.com/Herohtar/netlify-cms-oauth-firebase).
+This project was inspired by [`sveltia/sveltia-cms-auth`](https://github.com/sveltia/sveltia-cms-auth)
+which was inspired by [`netlify-cms-oauth-firebase`](https://github.com/Herohtar/netlify-cms-oauth-firebase).
