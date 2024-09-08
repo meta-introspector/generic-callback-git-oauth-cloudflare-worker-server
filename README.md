@@ -41,7 +41,8 @@ CF_ACCOUNT_ID=YYY
 
 ### Step 5. import token into gh cli
 Set
-`gh secret set -f .env --org meta-introspector --repos generic-callback-git-oauth-cloudflare-worker-server`
+`gh secret set -f .env  -R meta-introspector/generic-callback-git-oauth-cloudflare-worker-server`
+
 
 ### Step 6. Deploy this project to Cloudflare Workers
 
