@@ -103,19 +103,6 @@ Go back to the `generic-callback-git-oauth` service page on the Cloudflare dashb
 
 Save and deploy.
 
-### Step 4. Update your CMS configuration
-
-Open `admin/config.yml` locally or remotely, and add your Worker URL from Step 1 as the new `base_url` property under `backend`:
-
-```diff
- backend:
-   name: github # or gitlab
-   repo: username/repo
-   branch: main
-+  base_url: <YOUR_WORKER_URL>
-```
-
-Commit the change. Once deployed, you can sign into your app remotely with GitHub or GitLab!
 
 ## Plan for callbacks
 
