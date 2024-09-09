@@ -103,6 +103,179 @@ Go back to the `generic-callback-git-oauth` service page on the Cloudflare dashb
 
 Save and deploy.
 
+### Step 4. Test github
+
+Following these instructions
+https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authenticating-to-the-rest-api-with-an-oauth-app
+
+With the client id of the new github app as `Ov23liR8XH7uebRfEQGU`,
+
+We can now authorize this app:
+https://github.com/login/oauth/authorize?scope=user:email&client_id=Ov23liR8XH7uebRfEQGU
+
+in the worker page we can see the log event show up 
+https://dash.cloudflare.com/$ID/workers/services/view/generic-callback-git-oauth/production/logs/live
+
+```
+{
+  "truncated": false,
+  "outcome": "ok",
+  "scriptVersion": {
+    "id": "76112ae5-dd56-4b87-..."
+  },
+  "scriptName": "generic-callback-git-oauth",
+  "diagnosticsChannelEvents": [],
+  "exceptions": [],
+  "logs": [],
+  "eventTimestamp": 1725870049357,
+  "event": {
+    "request": {
+      "url": "https://generic-callback-git-oauth.jmikedupont2.workers.dev/callback?code=7c0d1f7e3eb07f5088b4",
+      "method": "GET",
+      "headers": {
+        "accept-encoding": "gzip, br",
+        "cf-connecting-ip": "66.249",
+        "cf-ipcountry": "US",
+        "cf-ray": "8c05c2e07ee98274",
+        "cf-visitor": "{\"scheme\":\"https\"}",
+        "connection": "Keep-Alive",
+        "host": "generic-callback-git-oauth.jmikedupont2.workers.dev",
+        "user-agent": "Mozilla/5.0 (Linux; Android 7.0; SM-G930V Build/NRD90M) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.125 Mobile Safari/537.36 (compatible; Google-Read-Aloud; +https://support.google.com/webmasters/answer/1061943)",
+        "x-forwarded-proto": "https",
+        "x-real-ip": "66.249...."
+      },
+      "cf": {
+        "clientTcpRtt": 8,
+        "longitude": "-97.82200",
+        "httpProtocol": "HTTP/1.1",
+        "tlsCipher": "AEAD-AES128-GCM-SHA256",
+        "continent": "NA",
+        "asn": 15169,
+        "clientAcceptEncoding": "gzip, deflate, br",
+        "country": "US",
+        "tlsClientAuth": {
+          "certIssuerDNLegacy": "",
+          "certIssuerSKI": "",....
+        },
+        "tlsExportedAuthenticator": {
+          "clientFinished": "522bd09b9e3e8effa8f3f",
+          "clientHandshake": "c75a338dda375176fd63",
+          "serverHandshake": "201d4213225f3fdc9db0",
+          "serverFinished": "bd1c35aa6270441e102d1"
+        },
+        "tlsVersion": "TLSv1.3",
+        "colo": "IAD",
+        "timezone": "America/Chicago",
+        "verifiedBotCategory": "Accessibility",
+        "edgeRequestKeepAliveStatus": 1,
+        "tlsClientRandom": "Beyb76DRy58tvVeL",
+        "tlsClientExtensionsSha1": "BizQtC8a5",
+        "tlsClientHelloLength": "508",
+        "asOrganization": "Google Proxy",
+        "requestPriority": "",
+        "latitude": "37.75100"
+      }
+    },
+    "response": {
+      "status": 200
+    }
+  },
+  "id": 4
+}```
+
+
+### Step 4. Test gitlab 
+
+Now we plugin in the application id, the target callback and the scope of the access into this and let the user login
+
+https://gitlab.com/oauth/authorize?client_id=3c45c9d073b105b999744708e40756f1d19c4b23950fbc6ededf715cc06c8a33&redirect_uri=https://generic-callback-git-oauth.jmikedupont2.workers.dev/callback&response_type=code&state=STATE&scope=api&code_challenge=CODE_CHALLENGE&code_challenge_method=S256
+
+```
+{
+  "truncated": false,
+  "outcome": "ok",
+  "scriptVersion": {
+    "id": "76112ae5-dd56-4b87-b7d9-43eb0f94bd70"
+  },
+  "scriptName": "generic-callback-git-oauth",
+  "diagnosticsChannelEvents": [],
+  "exceptions": [],
+  "logs": [],
+  "eventTimestamp": 1725870880589,
+  "event": {
+    "request": {
+      "url": "https://generic-callback-git-oauth.jmikedupont2.workers.dev/callback?code=REDACTED&state=STATE",
+      "method": "GET",
+      "headers": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+        "accept-encoding": "gzip, br",
+        "accept-language": "en-US",
+        "cf-connecting-ip": "66.249",
+        "cf-ipcountry": "US",
+        "cf-ray": "8c05d72bab9f173f",
+        "cf-visitor": "{\"scheme\":\"https\"}",
+        "connection": "Keep-Alive",
+        "host": "generic-callback-git-oauth.jmikedupont2.workers.dev",
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (Linux; Android 7.0; SM-G930V Build/NRD90M) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.125 Mobile Safari/537.36 (compatible; Google-Read-Aloud; +https://support.google.com/webmasters/answer/1061943)",
+        "x-forwarded-proto": "https",
+        "x-real-ip": "66.249"
+      },
+      "cf": {
+        "clientTcpRtt": 8,
+        "longitude": "-97.82200",
+        "httpProtocol": "HTTP/1.1",
+        "tlsCipher": "AEAD-AES128-GCM-SHA256",
+        "continent": "NA",
+        "asn": 15169,
+        "clientAcceptEncoding": "gzip, deflate, br",
+        "country": "US",
+        "tlsClientAuth": {
+          "certIssuerDNLegacy": "",
+          "certIssuerSKI": "",
+          "certSubjectDNRFC2253": "",
+          "certSubjectDNLegacy": "",
+          "certFingerprintSHA256": "",
+          "certNotBefore": "",
+          "certSKI": "",
+          "certSerial": "",
+          "certIssuerDN": "",
+          "certVerified": "NONE",
+          "certNotAfter": "",
+          "certSubjectDN": "",
+          "certPresented": "0",
+          "certRevoked": "0",
+          "certIssuerSerial": "",
+          "certIssuerDNRFC2253": "",
+          "certFingerprintSHA1": ""
+        },
+        "tlsExportedAuthenticator": {
+          "clientFinished": "0fff7a0ba3673a50915",
+          "clientHandshake": "5fab4d262b48e2a67a",
+          "serverHandshake": "84aa8220b27e372703",
+          "serverFinished": "eea8bf29f07ea836648"
+        },
+        "tlsVersion": "TLSv1.3",
+        "colo": "IAD",
+        "timezone": "America/Chicago",
+        "verifiedBotCategory": "Accessibility",
+        "edgeRequestKeepAliveStatus": 1,
+        "tlsClientRandom": "AI9y1n1Z6GnDxDW9T3",
+        "tlsClientExtensionsSha1": "xvnX7c3fTl",
+        "tlsClientHelloLength": "508",
+        "asOrganization": "Google Proxy",
+        "requestPriority": "",
+        "latitude": "37.75100"
+      }
+    },
+    "response": {
+      "status": 200
+    }
+  },
+  "id": 13
+}
+```
+
 
 ## Plan for callbacks
 
